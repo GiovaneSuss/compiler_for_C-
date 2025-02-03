@@ -3,10 +3,11 @@
 #include <string.h>
 #include "funcs.h"
 
-Token *current_token;
-Token *lookahead_token;
-int current_index = 0;
-int lookahead_index = 1;
+// declaração de variáveis globais
+Token *current_token; //token atual
+Token *lookahead_token; // token seguinte
+int current_index = 0; // index do token atual
+int lookahead_index = 1; // index do token seguinte
 
 // função para pegar o prox token
 void get_next_token(Buffer *buffer) {
@@ -87,7 +88,6 @@ void tipo_especificador(Buffer *buffer) {
     // se não for, gera um erro sintático
     } else {
         printf("ERRO SINTÁTICO: \"%s\" INVÁLIDO [linha: %i], COLUNA %i.\n", current_token->value,current_token->line,current_token->column);
-        //printf("Erro de sintaxe: tipo especificador inválido\n");
         exit(1);
     }
 }
@@ -297,7 +297,6 @@ void fator(Buffer *buffer) {
         }
     // se n for nenhum desses é um erro
     } else {
-        //printf("Erro de sintaxe: esperado um fator, encontrado EOF\n");
         printf("ERRO SINTÁTICO: \"%s\" INVÁLIDO [linha: %i], COLUNA %i.\n", current_token->value,current_token->line,current_token->column);
         exit(1);
     }
@@ -345,7 +344,7 @@ void iteracao_decl(Buffer *buffer) {
     match(buffer, "WHILE");
     match(buffer, "SYMBOL_LPAREN");
     expressao(buffer);
-    match(buffer, "SYMBOL_RPAREN"); // Adicionado
+    match(buffer, "SYMBOL_RPAREN");
     statement(buffer);
 }
 
